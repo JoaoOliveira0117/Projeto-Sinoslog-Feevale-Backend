@@ -1,13 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import logger from '../logger/winston.js';
 
-const db = async () =>  {
+const db = async () => {
   try {
-    console.log('connectiong to mongo server...')
-    await mongoose.connect(process.env.MONGO_URI)
-    console.log('successfully connected to database')
+    logger.info('Connectiong to mongo server');
+    await mongoose.connect(process.env.MONGO_URI);
+    logger.info('Successfully connected to database');
   } catch (err) {
-    throw new Error(err)
+    logger.error('Unable to connect to database ' + err);
+    throw new Error(err);
   }
-}
+};
 
-export default db
+export default db;
