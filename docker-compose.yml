@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "${MONGO_PORT}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_DATABASE}
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports:
+      - "${PORT}:3000"
+    environment:
+      - PORT=${PORT}
+      - MONGO_URI=mongodb://mongo:${MONGO_PORT}/${MONGO_DB_DATABASE}
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - nodemodules:/app/node_modules
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
+  nodemodules:
+  

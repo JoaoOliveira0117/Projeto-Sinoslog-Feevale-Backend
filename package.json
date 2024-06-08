@@ -1,11 +1,21 @@
 {
   "name": "projeto-feevale-meio-ambiente-backend",
+  "type": "module",
   "version": "1.0.0",
   "description": "Projeto para a atividade de Projeto Computacional para Universidade Feevale",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon -L ./src/index.js",
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  }
 }
