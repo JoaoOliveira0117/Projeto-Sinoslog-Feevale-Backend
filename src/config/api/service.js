@@ -1,3 +1,5 @@
+import NotFoundError from '../../http/errors/notFoundError.js';
+
 class Service {
   constructor(model) {
     this.model = model;
@@ -8,7 +10,13 @@ class Service {
   }
 
   async getById(id) {
-    return this.model.findById(id);
+    const document = await this.model.findById(id);
+
+    if (!document) {
+      throw new NotFoundError(`${this.model.modelName} does not exist`);
+    }
+
+    return document;
   }
 
   async create(data) {
@@ -16,11 +24,11 @@ class Service {
   }
 
   async updateById(id, data) {
-    return this.model.updateOne({ id }, { data });
+    return this.model.findOneAndUpdate({ _id: id }, data, { new: true });
   }
 
   async deleteById(id) {
-    return this.model.deleteOne({ id });
+    return this.model.deleteOne({ _id: id });
   }
 }
 

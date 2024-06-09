@@ -1,4 +1,5 @@
 import Controller from '../../config/api/controller.js';
+import asyncHandler from '../../http/asyncHandler.js';
 
 /**
  * @swagger
@@ -37,4 +38,4 @@ class GetHealthController extends Controller {
   }
 }
 
-export default (req, res) => new GetHealthController(req, res);
+export default asyncHandler(GetHealthController);

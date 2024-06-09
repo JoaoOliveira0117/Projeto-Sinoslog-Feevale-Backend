@@ -4,8 +4,6 @@ class Controller {
   constructor(req, res) {
     this.req = req;
     this.res = res;
-
-    this.send();
   }
 
   getSuccessStatusCode() {
@@ -30,6 +28,10 @@ class Controller {
 
   success(data) {
     return this.res.status(this.getSuccessStatusCode()).json({ data });
+  }
+
+  error(statusCode, errors) {
+    return this.res.status(statusCode).json({ errors });
   }
 
   async handle() {

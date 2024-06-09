@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
+import Controller from '../config/api/controller.js';
 
 const validate = (schema) => (req, res, next) => {
   try {
@@ -6,9 +7,10 @@ const validate = (schema) => (req, res, next) => {
     next();
   } catch (err) {
     const flattened = err.flatten();
-    return res
-      .status(StatusCodes.UNPROCESSABLE_ENTITY)
-      .json({ message: flattened.formErrors, errors: flattened.fieldErrors });
+    return new Controller(req, res).error(
+      StatusCodes.UNPROCESSABLE_ENTITY,
+      flattened.fieldErrors
+    );
   }
 };
 

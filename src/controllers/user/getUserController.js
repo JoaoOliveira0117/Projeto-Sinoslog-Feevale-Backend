@@ -1,4 +1,5 @@
 import Controller from '../../config/api/controller.js';
+import asyncHandler from '../../http/asyncHandler.js';
 import UserService from '../../services/user.js';
 
 /**
@@ -27,4 +28,4 @@ class GetUserController extends Controller {
   }
 }
 
-export default (req, res) => new GetUserController(req, res);
+export default asyncHandler(GetUserController);
