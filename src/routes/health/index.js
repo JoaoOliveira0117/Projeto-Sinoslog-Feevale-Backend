@@ -1,21 +1,8 @@
 import { Router } from 'express';
+import getHealthController from '../../controllers/health/getHealthController.js';
 
 const router = Router();
 
-/**
- * @swagger
- * /health:
- *  get:
- *    tags: ['Admin']
- *    summary: Verifica a saúde da API
- *    description: Verifica a saúde da API
- *    responses:
- *      200:
- *        description: Mensagem de sucesso
- */
-
-router.get('/', (_, res) => {
-  return res.json({ message: 'Im Healthy!' });
-});
+router.get('/', getHealthController);
 
 export default router;

@@ -5,11 +5,14 @@ import logger from './config/logger/winston.js';
 import router from './routes/index.js';
 import swaggerConfig from './config/docs/swagger.js';
 
+const port = process.env.PORT || 3000;
 const app = express();
 
-const port = process.env.PORT || 3000;
+app.use(express.json());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+swaggerConfig.then((config) =>
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(config))
+);
 
 app.use('/', router);
 
