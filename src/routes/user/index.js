@@ -6,13 +6,16 @@ import updateUserController from '../../controllers/user/updateUserController.js
 import deleteUserController from '../../controllers/user/deleteUserController.js';
 
 import createUserValidation from '../../validation/user/createUserValidation.js';
+import getUserByIdValidation from '../../validation/user/getUserByIdValidation.js';
+import deleteUserByIdValidation from '../../validation/user/deleteUserByIdValidation.js';
+import updateUserByIdValidation from '../../validation/user/updateUserByIdValidation.js';
 
 const router = Router();
 
 router.get('/', getUserController);
-router.get('/:id', getByIdUserController);
+router.get('/:id', getUserByIdValidation, getByIdUserController);
 router.post('/', createUserValidation, createUserController);
-router.put('/:id', updateUserController);
-router.delete('/:id', deleteUserController);
+router.put('/:id', updateUserByIdValidation, updateUserController);
+router.delete('/:id', deleteUserByIdValidation, deleteUserController);
 
 export default router;

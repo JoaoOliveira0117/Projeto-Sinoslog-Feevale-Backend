@@ -1,9 +1,11 @@
 import { StatusCodes } from 'http-status-codes';
 import Controller from '../config/api/controller.js';
 
-const validate = (schema) => (req, res, next) => {
+const validate = (schemas) => async (req, res, next) => {
   try {
-    schema.parse(req.body);
+    schemas.body && (await schemas.body.parseAsync(req.body));
+    schemas.params && (await schemas.params.parseAsync(req.params));
+    schemas.query && (await schemas.query.parseAsync(req.query));
     next();
   } catch (err) {
     const flattened = err.flatten();
