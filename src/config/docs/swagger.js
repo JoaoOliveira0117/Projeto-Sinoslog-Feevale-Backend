@@ -14,7 +14,19 @@ const options = async () => {
       },
       components: {
         schemas: schemas,
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
       },
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
     },
     apis: ['./src/controllers/**/*.js'], // Caminho para os arquivos que contêm as definições das rotas
   };

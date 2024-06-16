@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { Types } from 'mongoose';
 Types.ObjectId;
 
-const zDocumentExists = (Service) =>
+const zGetDocumentFromUuid = (Service) =>
   z.string().transform(async (id, ctx) => {
     if (!Types.ObjectId.isValid(id)) {
       ctx.addIssue({
@@ -26,4 +26,4 @@ const zDocumentExists = (Service) =>
     return id;
   });
 
-export default zDocumentExists;
+export default zGetDocumentFromUuid;

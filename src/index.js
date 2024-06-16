@@ -4,17 +4,18 @@ import db from './config/db/connection.js';
 import logger from './config/logger/winston.js';
 import router from './routes/index.js';
 import swaggerConfig from './config/docs/swagger.js';
+import error from './middlewares/error.js';
 
 const port = process.env.PORT || 3000;
 const app = express();
-
-app.use(express.json());
 
 swaggerConfig.then((config) =>
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(config))
 );
 
+app.use(express.json());
 app.use('/', router);
+app.use(error);
 
 app.listen(port, async () => {
   await db();

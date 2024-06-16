@@ -9,8 +9,11 @@ import createUserValidation from '../../validation/user/createUserValidation.js'
 import getUserByIdValidation from '../../validation/user/getUserByIdValidation.js';
 import deleteUserByIdValidation from '../../validation/user/deleteUserByIdValidation.js';
 import updateUserByIdValidation from '../../validation/user/updateUserByIdValidation.js';
+import auth from '../../middlewares/auth.js';
 
 const router = Router();
+
+router.use(auth);
 
 router.get('/', getUserController);
 router.get('/:id', getUserByIdValidation, getByIdUserController);

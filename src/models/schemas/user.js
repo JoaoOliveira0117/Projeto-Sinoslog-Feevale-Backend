@@ -1,6 +1,10 @@
 import { Schema } from 'mongoose';
 import { comparePassword, hashPassword } from '../../utils/bcrypt.js';
 
+/**
+ * UserSchema schema
+ * @constructor User
+ */
 const userSchema = new Schema({
   name: {
     type: String,
@@ -36,9 +40,9 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.comparePassword = function (password, cb) {
-  const isMatch = comparePassword(password, this.password);
-  return cb(null, isMatch);
+userSchema.methods.comparePassword = async function (password) {
+  const isMatch = await comparePassword(password, this.password);
+  return isMatch;
 };
 
 const definition = {

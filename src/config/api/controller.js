@@ -1,6 +1,11 @@
 import { StatusCodes } from 'http-status-codes';
 
 class Controller {
+  /**
+   * @constructor
+   * @param {ExpressRequest} req
+   * @param {ExpressResponse} res
+   */
   constructor(req, res) {
     this.req = req;
     this.res = res;
@@ -11,6 +16,11 @@ class Controller {
     return isPostOrPut ? StatusCodes.CREATED : StatusCodes.OK;
   }
 
+  /**
+   *
+   * @param {Object} filter
+   * @returns Object
+   */
   filterQuery(filter) {
     const queryParams = {};
 
@@ -26,10 +36,21 @@ class Controller {
     return queryParams;
   }
 
+  /**
+   *
+   * @param {Object} data
+   * @returns ExpressResponse
+   */
   success(data) {
     return this.res.status(this.getSuccessStatusCode()).json({ data });
   }
 
+  /**
+   *
+   * @param {StatusCodes} statusCode
+   * @param {Object} errors
+   * @returns ExpressResponse
+   */
   error(statusCode, errors) {
     return this.res.status(statusCode).json({ errors });
   }
@@ -39,7 +60,11 @@ class Controller {
   }
 
   async send() {
-    this.handle();
+    this.handle().catch((err) =>
+      this.error(err.status || StatusCodes.INTERNAL_SERVER_ERROR, {
+        raw: err.message,
+      })
+    );
   }
 }
 

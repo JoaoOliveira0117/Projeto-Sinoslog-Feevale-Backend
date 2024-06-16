@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import validate from '../../middlewares/validate.js';
-import zDocumentExists from '../shared/zDocumentExists.js';
+import zDocumentExists from '../shared/zGetDocumentFromUuid.js';
 import UserService from '../../services/user.js';
 
 const paramsSchema = z

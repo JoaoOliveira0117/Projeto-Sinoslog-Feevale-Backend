@@ -4,7 +4,6 @@ import logger from '../logger/winston.js';
 const db = async () => {
   try {
     logger.info('Connectiong to mongo server');
-    console.log(process.env.MONGO_URI);
     await mongoose.connect(process.env.MONGO_URI).catch((err) => {
       throw new Error(err);
     });
