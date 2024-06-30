@@ -13,11 +13,12 @@ import auth from '../../middlewares/auth.js';
 
 const router = Router();
 
+router.post('/', createUserValidation, createUserController);
+
 router.use(auth);
 
 router.get('/', getUserController);
 router.get('/:id', getUserByIdValidation, getByIdUserController);
-router.post('/', createUserValidation, createUserController);
 router.put('/:id', updateUserByIdValidation, updateUserController);
 router.delete('/:id', deleteUserByIdValidation, deleteUserController);
 

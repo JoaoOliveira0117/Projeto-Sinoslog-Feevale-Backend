@@ -23,17 +23,19 @@ const occurrenceSchema = new Schema({
   },
   date: {
     type: Date,
-    required: true,
+    default: new Date(),
   },
   description: {
     type: String,
   },
-  /**
-   * image: {
-   *  type: String,
-   *  required: true,
-   * }
-   */
+  imagePath: {
+    type: String,
+  },
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -43,6 +45,17 @@ const occurrenceSchema = new Schema({
     default: Date.now,
   },
 });
+
+occurrenceSchema.virtual('imageUrl').get(function () {
+  if (this.imagePath) {
+    const imagePath = `occurrences/${this._id}/preview`;
+    return imagePath;
+  }
+
+  return null;
+});
+
+occurrenceSchema.set('toJSON', { getters: true });
 
 const definition = {
   name: 'Occurrence',

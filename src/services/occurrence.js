@@ -6,6 +6,10 @@ class OccurrenceService extends Service {
     super(Occurrence);
   }
 
+  getAllFromUser(createdBy) {
+    return this.model.find({ createdBy });
+  }
+
   create(data) {
     return this.model.create(data);
   }
