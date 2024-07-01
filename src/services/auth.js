@@ -1,5 +1,5 @@
 import Service from '../config/api/service.js';
-import UnprocessableEntity from '../http/errors/UnprocessableEntity.js';
+import UnprocessableEntity from '../http/errors/unprocessableEntity.js';
 import User from '../models/user.js';
 import { generateToken } from '../utils/jwt.js';
 
