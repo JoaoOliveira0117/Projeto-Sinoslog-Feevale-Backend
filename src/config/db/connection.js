@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 import logger from '../logger/winston.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+console.log(process.env.MONGO_URI);
 
 const db = async () => {
   try {

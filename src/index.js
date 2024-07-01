@@ -5,6 +5,9 @@ import logger from './config/logger/winston.js';
 import router from './routes/index.js';
 import swaggerConfig from './config/docs/swagger.js';
 import error from './middlewares/error.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const port = process.env.PORT || 3000;
 const app = express();
